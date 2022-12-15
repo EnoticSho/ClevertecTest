@@ -1,17 +1,17 @@
 package store.Reader;
 
-import store.Paycheck;
 import store.Product;
+import store.model.Paycheck;
+import store.model.PaycheckWithoutDiscount;
 import store.productService.InMemoryProductService;
 import store.productService.ProductService;
+
 import java.util.HashMap;
 import java.util.Map;
 
-public class ArgsReader implements Reader {
-
+public class ArgsReader extends DecoratorReader{
     private final Map<Product, Integer> map = new HashMap<>();
     private int totalCost;
-
     private final ProductService productService = new InMemoryProductService();
 
     private Paycheck paycheck;
@@ -25,8 +25,8 @@ public class ArgsReader implements Reader {
             map.put(productService.getProductById(i), i1);
             totalCost += productService.getProductById(i).getCost() * i1;
         }
-        paycheck = new Paycheck.Builder().withProducts(map).build();
-        System.out.println(paycheck.convertToOut());
+        paycheck = new PaycheckWithoutDiscount.Builder().withProducts(map).build();
+        System.out.println(paycheck.toString());
         System.out.println(totalCost);
         System.out.println(map);
         return paycheck;

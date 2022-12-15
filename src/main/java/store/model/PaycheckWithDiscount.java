@@ -1,15 +1,17 @@
-package store;
+package store.model;
+
+import store.Product;
 
 import java.util.Map;
 
-public class Paycheck {
+public class PaycheckWithDiscount implements Paycheck {
 
     private Map<Product, Integer> products;
     private int totalCost;
     private boolean discount;
     private int discountAmount;
-
-    public String convertToOut() {
+    @Override
+    public String toString() {
         StringBuilder sb = new StringBuilder();
         for (Map.Entry<Product, Integer> productEntry : products.entrySet()) {
             sb.append(productEntry.getValue()).append(" ")
@@ -22,33 +24,33 @@ public class Paycheck {
     }
 
     public static class Builder {
-        private Paycheck paycheck;
+        private PaycheckWithDiscount paycheck;
 
         public Builder() {
-            paycheck = new Paycheck();
+            paycheck = new PaycheckWithDiscount();
         }
 
-        public Builder withProducts(Map<Product, Integer> products) {
+        public PaycheckWithDiscount.Builder withProducts(Map<Product, Integer> products) {
             paycheck.products = products;
             return this;
         }
 
-        public Builder withTotalCost(int totalCost) {
+        public PaycheckWithDiscount.Builder withTotalCost(int totalCost) {
             paycheck.totalCost = totalCost;
             return this;
         }
 
-        public Builder withDiscount(boolean discount) {
+        public PaycheckWithDiscount.Builder withDiscount(boolean discount) {
             paycheck.discount = discount;
             return this;
         }
 
-        public Builder withDiscountAmount(int discountAmount) {
+        public PaycheckWithDiscount.Builder withDiscountAmount(int discountAmount) {
             paycheck.discountAmount = discountAmount;
             return this;
         }
 
-        public Paycheck build() {
+        public PaycheckWithDiscount build() {
             return paycheck;
         }
     }

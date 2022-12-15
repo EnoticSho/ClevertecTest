@@ -5,13 +5,15 @@ public class Product {
     private final int id;
     private final String name;
     private int cost;
+    private boolean isDiscount;
 
 
 
-    public Product(String name, int cost) {
+    public Product(String name, int cost, boolean isDiscount) {
         id = ++idInit;
         this.name = name;
         this.cost = cost;
+        this.isDiscount = isDiscount;
     }
 
     public String getName() {
@@ -34,5 +36,13 @@ public class Product {
     @Override
     public String toString() {
         return name + " " + cost;
+    }
+
+    public boolean isDiscount() {
+        return isDiscount;
+    }
+
+    public void setDiscount(boolean discount) {
+        isDiscount = discount;
     }
 }

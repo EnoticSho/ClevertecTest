@@ -1,6 +1,6 @@
 package store.Reader;
 
-import store.Paycheck;
+import store.model.Paycheck;
 
 public interface Reader {
     public Paycheck readFromArgs(String[] args);
