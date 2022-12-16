@@ -1,6 +1,6 @@
 package store.productService;
 
-import store.Product;
+import store.model.Product;
 
 public interface ProductService {
 
