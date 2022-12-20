@@ -5,9 +5,9 @@ import store.model.Paycheck;
 import java.io.IOException;
 
 public class DecoratorCheckService implements CheckService {
-    private CheckService checkReader;
+    private final CheckService checkReader;
 
-        DecoratorCheckService(CheckService checkReader) {
+    DecoratorCheckService(CheckService checkReader) {
         this.checkReader = checkReader;
     }
 

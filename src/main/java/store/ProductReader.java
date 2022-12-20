@@ -10,17 +10,18 @@ import java.io.FileWriter;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Path;
+import java.util.Arrays;
 
 public class ProductReader {
     private final String[] args;
     private CheckService reader;
-    private Paycheck paycheck;
 
     public ProductReader(String[] args) {
         this.args = args;
     }
 
     public void run() throws IOException {
+        System.out.println(Arrays.toString(args));
         if (Files.exists(Path.of(args[0]))) {
             reader = new CheckServiceFile(new ArgsCheckService());
         } else {

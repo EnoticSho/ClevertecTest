@@ -20,16 +20,17 @@ public class Paycheck {
             int cost = productEntry.getKey().getCost();
             Integer count = productEntry.getValue();
             int total = cost * count;
-            sb.append(String.format("  %-3d %-14s %5d %7d%n", count, name, cost, total));
+            String add = "";
             if (productEntry.getKey().isDiscount() && count > 4) {
+                add = String.format("%20s %6d %s%n", "Discount: ", (total / 10), "(10%)");
                 total = total - (total / 10);
-                String addString = String.format("%30s %3s%n", "Discount: ", "10%");
-                sb.append(addString);
             }
+            sb.append(String.format("  %-3d %-14s %5d %7d%n", count, name, cost, total));
+            sb.append(add);
         }
         int disc = discountAmount * totalCost / 100;
         int discPrice = totalCost - disc;
-        String str = String.format("%s%n%20s %13d%n%20s %13d%n", "----------------------------------", "Total Cost:", totalCost, "Your discount:", disc);
+        String str = String.format("%s%n %19s %13d%n %19s %13d%n", "----------------------------------", "Total Cost:", totalCost, "Your discount:", disc);
         sb.append(str);
         str = String.format("%20s %13d", "Discounted price", discPrice);
         sb.append(str);

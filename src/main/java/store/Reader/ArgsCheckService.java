@@ -39,7 +39,11 @@ public class ArgsCheckService implements CheckService {
             int id = Integer.parseInt(string.substring(0, string.indexOf('-')));
             int count = Integer.parseInt(string.substring(string.indexOf('-') + 1));
             Product product = productService.getProductById(id);
-            totalCost += product.getCost() * count;
+            if (product.isDiscount() && count > 4) {
+                totalCost += (product.getCost() * count) / 10 * 9;
+            } else {
+                totalCost += product.getCost() * count;
+            }
             map.put(productService.getProductById(id), count);
         }
         return builder.withProducts(map).withTotalCost(totalCost).build();
@@ -47,7 +51,7 @@ public class ArgsCheckService implements CheckService {
 
     @Override
     public void writeCheckToFile(Paycheck paycheck) throws IOException {
-        String fileName = "Paychecks" + "/" + paycheck.getDate().toString();
+        String fileName = "Paychecks" + "/" + paycheck.getDate().toString().trim().replaceAll(":", "-");
         Files.createFile(Path.of(fileName));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(paycheck.toString());
