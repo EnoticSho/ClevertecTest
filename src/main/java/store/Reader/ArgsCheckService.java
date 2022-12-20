@@ -59,7 +59,6 @@ public class ArgsCheckService implements CheckService {
     @Override
     public void writeCheckToFile(Paycheck paycheck) throws IOException {
         String fileName = "Paychecks" + "/" + paycheck.getDate().toString().trim().replaceAll(":", "-");
-        Files.createDirectory(Path.of("Paychecks"));
         Files.createFile(Path.of(fileName));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(paycheck.toString());
