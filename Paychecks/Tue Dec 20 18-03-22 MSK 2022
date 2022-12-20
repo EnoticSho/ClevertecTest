@@ -1,0 +1,13 @@
+Date: вт дек. 20 18:03:22 MSK 2022
+----------------------------------
+Count Name           Price   Total
+  1   cucumber         300     300
+  1   tomato           400     400
+  5   orange           200     900
+          Discount:     100 (10%)
+  5   apple            100     450
+          Discount:      50 (10%)
+----------------------------------
+         Total Cost:          2050
+      Your discount:           348
+    Discounted price          1702

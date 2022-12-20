@@ -34,7 +34,7 @@ public class ArgsCheckService implements CheckService {
                 int discountAmountByName = cardService.getDiscountAmountByName(
                         string.substring(string.indexOf('-') + 1));
                 if (discountAmountByName == 0) {
-                    throw new RuntimeException("Òàêîé êàðòû íå ñóùåñòâóåò");
+                    throw new RuntimeException("ÐšÐ°Ñ€Ñ‚Ñ‹ Ñ Ñ‚Ð°ÐºÐ¸Ð¼ Ð½Ð°Ð·Ð²Ð°Ð½Ð¸Ðµ Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚");
                 }
                 builder
                         .withDiscountAmount(discountAmountByName);
@@ -44,7 +44,7 @@ public class ArgsCheckService implements CheckService {
             int count = Integer.parseInt(string.substring(string.indexOf('-') + 1));
             Product product = productService.getProductById(id);
             if (product == null) {
-                throw new RuntimeException("Òîâàðà ñ òàêèì Id íå ñóùåñòâóåò");
+                throw new RuntimeException("ÐŸÑ€Ð¾Ð´ÑƒÐºÑ‚Ð° Ñ Ñ‚Ð°ÐºÐ¸Ð¼ ID Ð½Ðµ ÑÑƒÑ‰ÐµÑÑ‚Ð²ÑƒÐµÑ‚");
             }
             if (product.isDiscount() && count > 4) {
                 totalCost += (product.getCost() * count) / 10 * 9;
@@ -59,6 +59,7 @@ public class ArgsCheckService implements CheckService {
     @Override
     public void writeCheckToFile(Paycheck paycheck) throws IOException {
         String fileName = "Paychecks" + "/" + paycheck.getDate().toString().trim().replaceAll(":", "-");
+        Files.createDirectory(Path.of("Paychecks"));
         Files.createFile(Path.of(fileName));
         try (BufferedWriter bufferedWriter = new BufferedWriter(new FileWriter(fileName))) {
             bufferedWriter.write(paycheck.toString());
