@@ -31,14 +31,21 @@ public class ArgsCheckService implements CheckService {
         Paycheck.Builder builder = new Paycheck.Builder();
         for (String string : array) {
             if (string.contains("card")) {
+                int discountAmountByName = cardService.getDiscountAmountByName(
+                        string.substring(string.indexOf('-') + 1));
+                if (discountAmountByName == 0) {
+                    throw new RuntimeException("Такой карты не существует");
+                }
                 builder
-                        .withDiscountAmount(cardService.getDiscountAmountByName(
-                                string.substring(string.indexOf('-') + 1)));
+                        .withDiscountAmount(discountAmountByName);
                 break;
             }
             int id = Integer.parseInt(string.substring(0, string.indexOf('-')));
             int count = Integer.parseInt(string.substring(string.indexOf('-') + 1));
             Product product = productService.getProductById(id);
+            if (product == null) {
+                throw new RuntimeException("Товара с таким Id не существует");
+            }
             if (product.isDiscount() && count > 4) {
                 totalCost += (product.getCost() * count) / 10 * 9;
             } else {
