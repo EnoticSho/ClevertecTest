@@ -2,6 +2,7 @@ package store.cardService;
 
 import store.model.DiscountCard;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -24,5 +25,10 @@ public class InMemoryCardServiceImpl implements CardService {
             }
         }
         return 0;
+    }
+
+    @Override
+    public void close() throws IOException {
+        
     }
 }

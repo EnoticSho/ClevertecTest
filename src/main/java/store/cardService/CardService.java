@@ -1,5 +1,7 @@
 package store.cardService;
 
-public interface CardService {
+import java.io.Closeable;
+
+public interface CardService extends Closeable {
     int getDiscountAmountByName(String name);
 }

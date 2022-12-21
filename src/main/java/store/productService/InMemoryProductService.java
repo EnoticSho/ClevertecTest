@@ -3,6 +3,7 @@ package store.productService;
 import store.model.Product;
 import store.model.ProductsInit;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -27,5 +28,10 @@ public class InMemoryProductService implements ProductService {
             }
         }
         return null;
+    }
+
+    @Override
+    public void close() throws IOException {
+
     }
 }
