@@ -2,7 +2,9 @@ package store.productService;
 
 import store.model.Product;
 
-public interface ProductService {
+import java.io.Closeable;
+
+public interface ProductService extends Closeable {
 
     public Product getProductById(int id);
 }
