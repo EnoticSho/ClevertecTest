@@ -1,10 +1,8 @@
 package store.Reader;
 
 import store.cardService.CardService;
-import store.cardService.InMemoryCardServiceImpl;
-import store.model.Product;
 import store.model.Paycheck;
-import store.productService.InMemoryProductService;
+import store.model.Product;
 import store.productService.ProductService;
 
 import java.io.BufferedWriter;
@@ -21,9 +19,9 @@ public class ArgsCheckService implements CheckService {
     private final ProductService productService;
     private int totalCost;
 
-    public ArgsCheckService() {
-        productService = new InMemoryProductService();
-        cardService = new InMemoryCardServiceImpl();
+    public ArgsCheckService(ProductService productService, CardService cardService) {
+        this.productService = productService;
+        this.cardService = cardService;
         map = new HashMap<>();
     }
 
@@ -33,9 +31,6 @@ public class ArgsCheckService implements CheckService {
             if (string.contains("card")) {
                 int discountAmountByName = cardService.getDiscountAmountByName(
                         string.substring(string.indexOf('-') + 1));
-                if (discountAmountByName == 0) {
-                    throw new RuntimeException("Карты с таким название не существует");
-                }
                 builder
                         .withDiscountAmount(discountAmountByName);
                 break;

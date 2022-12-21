@@ -8,11 +8,18 @@ public class Product {
     private int cost;
     private boolean isDiscount;
 
-    public Product(String name, int cost, boolean isDiscount) {
-        id = ++idInit;
+    public Product(int id, String name, int cost, boolean isDiscount) {
+        this.id = id;
         this.name = name;
         this.cost = cost;
         this.isDiscount = isDiscount;
+    }
+
+    public Product(ProductsInit pr) {
+        id = ++idInit;
+        this.name = pr.getName();
+        this.cost = pr.getCost();
+        this.isDiscount = pr.isDiscount();
     }
 
     public String getName() {

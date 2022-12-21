@@ -30,10 +30,9 @@ public class Paycheck {
         }
         int disc = discountAmount * totalCost / 100;
         int discPrice = totalCost - disc;
-        String str = String.format("%s%n %19s %13d%n %19s %13d%n", "----------------------------------", "Total Cost:", totalCost, "Your discount:", disc);
-        sb.append(str);
-        str = String.format("%20s %13d", "Discounted price", discPrice);
-        sb.append(str);
+        sb.append(String.format("%s%n %19s %13d%n %19s %13d%n", "----------------------------------",
+                "Total Cost:", totalCost, "Your discount:", disc));
+        sb.append(String.format("%20s %13d", "Discounted price", discPrice));
         return sb.toString();
     }
 
@@ -54,7 +53,7 @@ public class Paycheck {
     }
 
     public static class Builder {
-        private Paycheck paycheck;
+        private final Paycheck paycheck;
 
         public Builder() {
             paycheck = new Paycheck();
